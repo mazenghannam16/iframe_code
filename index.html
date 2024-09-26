@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MezoTV</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="https://k.top4top.io/p_3191jwhq21.png" type="image/png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: "Alexandria", sans-serif;
+    direction: rtl;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: linear-gradient(270deg, #212121, #363635, #212121, #363635, #212121);
+    background-size: 400% 400%;
+    animation: gradient-spin 10s ease infinite;
+    color: white;
+    text-align: center;
+}
+
+@keyframes gradient-spin {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 5px solid white;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+	font-family: "Alexandria", sans-serif;
+}
+
+.menu-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background: #A7A5A5;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    color: WHITE;
+    font-size: 20px;
+    cursor: pointer;
+    width: 330px;
+	height: 45px; /* تغيير هذه القيمة حسب الطول الذي تريده */
+    position: relative;
+	font-family: "Alexandria", sans-serif;
+}
+
+.menu-button:hover {
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5), 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 1);
+    }
+}
+
+.footer1 {
+    margin-top: 10px;
+    font-family: "Arial", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.footer2 {
+    margin-top: 10px;
+  font-family: "Alexandria", sans-serif;
+   color: #fe9200;
+}
+
+.footer3 {
+    margin-top: 10px;
+  font-family: "Alexandria", sans-serif;
+  color: #fe9200;
+}
+.logo-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: -10px;
+}
+
+.logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.button-text {
+    flex-grow: 1;
+}
+
+
+</style>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://k.top4top.io/p_3191jwhq21.png" alt="FOX TV" class="logo"> <!-- استبدل المسار بالصورة الخاصة بك -->
+            <h1 style="font-size: 18px;">تطبيق MezoTV النسخة الأصلية</h1>
+
+        </header>
+        <nav class="menu">
+   <button class="menu-button" onclick="window.location.href='http://example.com';">
+    <span class="logo-circle">
+        <img src="https://i.postimg.cc/y8YPMCdy/downloads-1.png" alt="Logo">
+    </span>
+    <span class="button-text">تحميل مباشر</span>
+</button>
+<button class="menu-button" onclick="window.location.href='http://example.com';">
+    <span class="logo-circle">
+        <img src="https://images.freeimages.com/fic/images/icons/2794/metro_ui/512/mediafire.png?fmt=webp&w=500" alt="Logo">
+    </span>
+    <span class="button-text">تحميل من ميديا فاير</span>
+</button>
+
+<button class="menu-button" onclick="window.location.href='http://example.com';">
+    <span class="logo-circle">
+        <img src="https://i.postimg.cc/K8qNFp3S/mega.png" alt="Logo">
+    </span>
+    <span class="button-text">تحميل من ميجا</span>
+</button>
+
+<button class="menu-button" onclick="window.location.href='http://example.com';">
+    <span class="logo-circle">
+        <img src="https://i.postimg.cc/mrKy1cSm/google-drive.png" alt="Logo">
+    </span>
+    <span class="button-text">تحميل من جوجل درايف</span>
+</button>
+
+        </nav>
+        <footer class="footer1">
+            Versions App: ---
+        </footer>
+		<footer class="footer2">
+           كود التطبيق دوانلودر : ---
+        </footer>
+		<footer class="footer3">
+            كود المشغل دوانلودر : ---
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
