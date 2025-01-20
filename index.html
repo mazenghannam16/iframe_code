@@ -56,13 +56,6 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .output-item button {
-            background-color: #4caf50;
-            margin-top: 5px;
-        }
-        .output-item button:hover {
-            background-color: #45a049;
-        }
         .output-item span {
             display: block;
             margin-bottom: 5px;
@@ -80,7 +73,7 @@
     <div id="output">
         <h3>الصور المستخرجة مع الأسماء:</h3>
         <div id="imageList"></div>
-        <button onclick="copyAll()">نسخ الروابط</button>
+        <button onclick="copyAll()">نسخ كل الروابط</button>
     </div>
 
     <script>
@@ -103,12 +96,7 @@
                 const span = document.createElement("span");
                 span.textContent = text;
 
-                const copyButton = document.createElement("button");
-                copyButton.textContent = "نسخ الرابط";
-                copyButton.onclick = () => copyText(imgUrl);
-                
                 listItem.appendChild(span);
-                listItem.appendChild(copyButton);
                 imageList.appendChild(listItem);
             }
         }
@@ -120,7 +108,7 @@
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-            alert('تم نسخ الرابط!');
+            alert('تم نسخ الروابط!');
         }
 
         function copyAll() {
