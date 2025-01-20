@@ -3,110 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>استخراج الـ iframe مع رابط ونسخه</title>
+    <title>مولد استخراج الصور مع الأسماء</title>
     <style>
         body {
-            background-color: #124364; /* اللون المطلوب للخلفية */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #164384;
             color: white;
-            font-family: 'Cairo', sans-serif; /* خط عربي عريض */
+            margin: 0;
+            padding: 0;
             text-align: center;
         }
-        h1, h2 {
-            font-weight: bold; /* جعل العنوان عريض */
+        h2 {
+            margin-top: 30px;
+            font-size: 24px;
+            color: #f0f0f0;
         }
-        .iframe-container {
-            border: 2px solid #ccc;
+        textarea {
             padding: 10px;
-            margin-top: 20px;
+            font-size: 14px;
             width: 80%;
-            max-width: 600px;
-            background-color: #222; /* خلفية داكنة للمحتوى */
-            color: white; /* جعل النص داخل الإطار باللون الأبيض */
-        }
-        .iframe-container iframe {
-            width: 100%;
-            height: 400px;
+            height: 150px;
+            border-radius: 5px;
+            border: none;
+            resize: none;
+            background-color: #f0f0f0;
+            color: #333;
         }
         button {
-            margin-top: 10px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #333;
+            background-color: #1e6bb8;
             color: white;
             border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #555;
+            background-color: #155b8a;
         }
-        textarea {
-            width: 80%;
-            max-width: 600px;
-            height: 100px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 16px;
-            color: white;
-            background-color: #333;
-            border: 1px solid #ccc;
+        #output {
+            margin-top: 30px;
+        }
+        .output-item {
+            margin: 10px 0;
             padding: 10px;
+            background-color: #1c4a7c;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            text-align: left;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
         }
-        a {
-            color: #1E90FF;
+        .output-item button {
+            background-color: #4caf50;
+            margin-top: 5px;
+        }
+        .output-item button:hover {
+            background-color: #45a049;
+        }
+        .output-item span {
+            display: block;
+            margin-bottom: 5px;
+            color: #f0f0f0;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <h1>سحب iframe</h1>
-
-    <!-- مربع نص لإدخال السورس كود -->
-    <textarea id="sourceCode" placeholder="أدخل السورس كود هنا..."></textarea>
-    <br>
-    <button onclick="extractIframe()">استخراج الـ iframe</button>
-
-    <h2>الـ iframe المستخرج:</h2>
-    <div id="result"></div>
+    <h2>مولد استخراج الصور مع الأسماء</h2>
+    <label for="htmlCode">أدخل كود HTML:</label><br>
+    <textarea id="htmlCode" placeholder="أدخل الكود هنا..."></textarea><br><br>
+    <button onclick="extractImages()">توليد الكود</button>
+    
+    <div id="output">
+        <h3>الصور المستخرجة مع الأسماء:</h3>
+        <div id="imageList"></div>
+        <button onclick="copyAll()">نسخ الروابط</button>
+    </div>
 
     <script>
-        function extractIframe() {
-            // الحصول على السورس كود المدخل
-            var sourceCode = document.getElementById('sourceCode').value;
+        function extractImages() {
+            const htmlCode = document.getElementById("htmlCode").value;
+            const imageList = document.getElementById("imageList");
+            imageList.innerHTML = '';  // Clear previous results
             
-            // استخدام تعبير منتظم لاستخراج الـ iframe
-            var iframeRegex = /<iframe[^>]*src=["']([^"']+)["'][^>]*><\/iframe>/g;
-            var result = '';
-            var match;
+            // Regular expression to find image URLs (JPG, PNG) and team names
+            const regex = /<div class="fareq">\s*<div class="Imagee"><img[^>]*src="([^"]*\.(jpg|png))"[^>]*>.*?<div class="asm">([^<]+)<\/div>/g;
+            let match;
+            
+            while ((match = regex.exec(htmlCode)) !== null) {
+                const imgUrl = match[1];
+                const teamName = match[3];
+                const listItem = document.createElement("div");
+                listItem.classList.add("output-item");
+                
+                const text = `${teamName}: ${imgUrl}`;
+                const span = document.createElement("span");
+                span.textContent = text;
 
-            // البحث عن كل الـ iframe في السورس كود
-            while ((match = iframeRegex.exec(sourceCode)) !== null) {
-                var iframeSrc = match[1]; // استخراج الرابط داخل الـ iframe
-
-                // إضافة الـ iframe في مستطيل مع رابط النسخ
-                result += `
-                    <div class="iframe-container">
-                        <iframe src="${iframeSrc}" frameborder="0"></iframe>
-                        <p>رابط الـ iframe: <a href="${iframeSrc}" target="_blank">${iframeSrc}</a></p>
-                        <button onclick="copyLink('${iframeSrc}')">نسخ الرابط</button>
-                    </div>
-                `;
-            }
-
-            // عرض النتيجة في العنصر
-            if (result) {
-                document.getElementById('result').innerHTML = result;
-            } else {
-                document.getElementById('result').innerHTML = '<p>لا يوجد iframe في السورس كود المدخل.</p>';
+                const copyButton = document.createElement("button");
+                copyButton.textContent = "نسخ الرابط";
+                copyButton.onclick = () => copyText(imgUrl);
+                
+                listItem.appendChild(span);
+                listItem.appendChild(copyButton);
+                imageList.appendChild(listItem);
             }
         }
 
-        // دالة لنسخ الرابط إلى الحافظة
-        function copyLink(link) {
-            var tempInput = document.createElement('input');
-            tempInput.value = link;
-            document.body.appendChild(tempInput);
-            tempInput.select();
+        function copyText(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
             document.execCommand('copy');
-            document.body.removeChild(tempInput);
+            document.body.removeChild(textArea);
             alert('تم نسخ الرابط!');
+        }
+
+        function copyAll() {
+            const allLinks = [...document.querySelectorAll('#imageList .output-item')];
+            const allText = allLinks.map(item => item.textContent).join('\n');
+            copyText(allText);
         }
     </script>
 </body>
